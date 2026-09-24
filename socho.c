@@ -1,37 +1,43 @@
 #include <stdio.h>
-int main(){
-    int staff;
-    int access;
-    printf("Enter the number of staff: ");
-    scanf("%d", &staff);
-    switch(staff){
-        case 1:
-            printf("Staff:Admin\n");
-            break;
-        case 2:
-            printf("Staff:Manager\n");
-            break;
-        case 3:
-            printf("Staff:Employee\n");
-            break;
-        default:
-            printf("Invalid staff number\n");
-            return 1;
-    }
-    printf("Grant access to? ");
+
+#define BUILD_ENTRY  1 
+#define LAB_ACCESS   2 
+#define SERVER_ROOM  4  
+
+int main() {
+    int role, access;
+
+    // Ask user for input
+    printf("Enter role (1=Admin, 2=Manager, 3=Staff): ");
+    scanf("%d", &role);
+    
+    printf("Enter access level integer: ");
     scanf("%d", &access);
-    switch(access){
-        case 1:
-            printf("Access granted to building %d\n", access);
-            break;
-        case 2:
-            printf("Access granted to lab %d\n", access);
-            break;
-        case 3:
-            printf("Access granted to server room %d\n", access);
-            break;    
-        default:
-            printf("Access denied\n");
+
+    // Decision structure for role greetings
+    switch (role) {
+        case 1: printf("\nWelcome, Admin!\n"); break;
+        case 2: printf("\nWelcome, Manager!\n"); break;
+        case 3: printf("\nWelcome, Staff!\n"); break;
+        default: printf("\nInvalid role!\n"); return 1;
     }
+
+    // Checking permissions using Bitwise AND
+    printf("Permissions:\n");
+    if (access & BUILD_ENTRY) {
+        printf("- Entry to Building\n");
+    }
+    if (access & LAB_ACCESS) {
+        printf("- Access to Lab\n");
+    }
+    if (access & SERVER_ROOM) {
+        printf("- Access to Server Room\n");
+    }
+
+    // Combined logical operator check example (e.g., restricted zone check)
+    if ((access & LAB_ACCESS) && (access & SERVER_ROOM)) {
+        printf("Notice: You have high-level security clearance.\n");
+    }
+
     return 0;
 }
