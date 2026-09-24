@@ -13,16 +13,12 @@ int main() {
     
     printf("Enter access level integer: ");
     scanf("%d", &access);
-
-    // Decision structure for role greetings
     switch (role) {
         case 1: printf("\nWelcome, Admin!\n"); break;
         case 2: printf("\nWelcome, Manager!\n"); break;
         case 3: printf("\nWelcome, Staff!\n"); break;
         default: printf("\nInvalid role!\n"); return 1;
     }
-
-    // Checking permissions using Bitwise AND
     printf("Permissions:\n");
     if (access & BUILD_ENTRY) {
         printf("- Entry to Building\n");
@@ -33,8 +29,6 @@ int main() {
     if (access & SERVER_ROOM) {
         printf("- Access to Server Room\n");
     }
-
-    // Combined logical operator check example (e.g., restricted zone check)
     if ((access & LAB_ACCESS) && (access & SERVER_ROOM)) {
         printf("Notice: You have high-level security clearance.\n");
     }
